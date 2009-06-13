@@ -1,0 +1,56 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+<title>
+{% block title %}
+Page title
+{% endblock %}
+</title>
+
+<style type="text/css">
+<!--
+.contents{
+  width: 70%;
+        float: right;
+}
+.sidebar{
+   width: 25%;
+         float: right;
+}
+-->
+</style>
+
+</head>
+<body>
+
+<div class="contents">
+
+{% block contents %}
+
+asdf
+{% endblock %}
+</div>
+
+<div class="sidebar">
+{% block sidebar %}
+<h3>Navigation</h3>
+<ul>
+<li><a href="/">Home</a></li>
+<li><a href="/create/">Create new incident report</a></li>
+</ul>
+
+<h3>Recent Incidents</h3>
+<ul>
+{% for incident in recents %}
+<li>
+<a href="{{incident.get_absolute_url}}">{{incident.short_summary}}</a>
+
+</li>
+{% endfor %}
+</ul>
+{% endblock %}
+</div>
+
+</body>
+</html>

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+TrailReporter - dev build
+{% endblock %}
+
+{% block contents %}
+<h2>TrailReporter - dev build</h2>
+
+{% for incident in incidents %}
+<div class="incident">
+<a href="{{incident.get_absolute_url}}">{{incident.short_summary}}</a>
+<br>
+By {{incident.user}} on {{incident.created_on|date}}
+</div>
+{% endfor %}
+{% endblock %}
