@@ -1,15 +1,15 @@
 from google.appengine.ext import db
 
 class Incident(db.Model):
-    short_summary = db.StringProperty()
-    description = db.StringProperty()
-    email_address = db.StringProperty()
-    date = db.StringProperty()
-    time = db.StringProperty()
-    category = db.StringProperty()
-    latitude = db.StringProperty()
-    longitude = db.StringProperty()
-    created_on = db.DateTimeProperty(auto_now_add = 1)
+    short_summary = db.StringProperty(required=True)
+    description = db.StringProperty(multiline=True,required=True)
+    email_address = db.EmailProperty(required=True)
+    date = db.StringProperty(required=True)
+    time = db.TimeProperty(required=True)
+    category = db.StringProperty(required=True,choices=set(["Road Rage","Crash","Assault","Other"]))
+    location_lat = db.StringProperty()
+    location_lng = db.StringProperty()
+    created_on = db.DateProperty(auto_now_add=1)
     created_by = db.UserProperty()
 
     def __str__(self):

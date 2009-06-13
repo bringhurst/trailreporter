@@ -1,22 +1,21 @@
 {% extends 'base.html' %}
 
 {% block contents %}
-<form action="." method="post">
+<form class="cmxform" id="createForm" action="." method="post">
 {{incidentform.as_p}}
-
-<input type="submit" name="createincident" value="createincident" />
-
+<input type="submit" name="createincident" value="Report this incident" />
 </form>
 
 <script>
-  $(function(){
+  $(document).ready(function() {
     $('#id_date').datepicker({
       inline: true,
       showTime: true
     });
     $('#id_time').timepickr({
-      convention: 12
+      convention: 24
     });
+//    $("#createForm").validate();
   });
 </script>
 
