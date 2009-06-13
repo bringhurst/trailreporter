@@ -8,11 +8,38 @@
 
 <form class="cmxform" id="createForm" action="." method="post">
 {{incidentform.as_p}}
+
+<div id="mapstraction_createmap" style="position:relative;  height: 400px; width: 100%;"></div>
+
 <input type="submit" name="createincident" value="Report this incident" />
 </form>
 
 <script>
+  var tr_mxn_cm;
+
   $(document).ready(function() {
+    tr_mxn_cm = new Mapstraction('mapstraction_createmap', 'google');
+    tr_mxn_cm.addControls({
+      pan: true,
+      zoom: 'large',
+      overview: true,
+      scale: true,
+      map_type: true
+    });
+
+    var myPoint = new LatLonPoint(40.039362,-75.242894);
+    tr_mxn_cm.setCenterAndZoom(myPoint, 14);
+
+    tr_mxn_cm.addEventListener('click', function(point, marker) {
+      tr_mxn_cm.removeAllMarkers();
+
+      var new_marker = new Marker(point);
+      tr_mxn_cm.addMarker(new_marker);
+
+      $('#id_location_lat').val(point.lat);
+      $('#id_location_lng').val(point.lon);
+    });
+
     $('#id_date').datepicker({
       inline: true,
       showTime: true
