@@ -8,4 +8,16 @@
 
 </form>
 
+<script>
+  $(function(){
+    $('#id_date').datepicker({
+      inline: true,
+      showTime: true
+    });
+    $('#id_time').timepickr({
+      convention: 12
+    });
+  });
+</script>
+
 {% endblock %}

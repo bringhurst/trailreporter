@@ -9,9 +9,9 @@ TrailReporter - dev build
 
 {% for incident in incidents %}
 <div class="incident">
-<a href="{{incident.get_absolute_url}}">{{incident.short_summary}}</a>
-<br>
-By {{incident.user}} on {{incident.created_on|date}}
+  <a href="{{incident.get_absolute_url}}">{{incident.short_summary}}</a>
+  <br />
+  By {{incident.user}} on {{incident.created_on|date}}
 </div>
 {% endfor %}
 {% endblock %}
