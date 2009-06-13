@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
 
 {% block contents %}
+<style>
+  label { position: absolute; text-align:right; width:130px; }
+  input, textarea, select, span.ui-timepickr { margin-left: 140px; }
+</style>
+
 <form class="cmxform" id="createForm" action="." method="post">
 {{incidentform.as_p}}
 <input type="submit" name="createincident" value="Report this incident" />
@@ -13,7 +18,8 @@
       showTime: true
     });
     $('#id_time').timepickr({
-      convention: 24
+      convention: 24,
+      handle: '#id_time'
     });
 //    $("#createForm").validate();
   });
