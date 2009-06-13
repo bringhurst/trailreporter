@@ -20,6 +20,13 @@
 
     <style type="text/css">
     <!--
+      .header{
+        width: 100%;
+        padding: 0px;
+        margin: 0;
+        background-color: #CFECEC;
+      }
+
       .contents{
         width: 70%;
         float: right;
@@ -29,11 +36,42 @@
         width: 25%;
         float: right;
       }
+
+      h2{
+        font-family: Verdana, Arial, Helvetica, sans-serif;
+        color: #000080;
+        text-decoration : none;
+        font-size: 25px;
+        font-weight: bold;
+        text-align: left;
+        word-spacing: 0;
+        text-indent: 5px;
+        line-height: 100%;
+        margin: 5px;
+        padding: 0;
+      }
+
+      #header-hr{
+        color: #c0c0c0;
+        background-color: #c0c0c0;
+        height: 5px;
+        border: none;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+      }
     -->
     </style>
   </head>
 
   <body>
+    <div class="header">
+      <h2>Bike Trail</h2>
+      <center>
+      <hr id="header-hr" /></center>
+      <h2>Incident Reporter</h2>
+    </div>
+
     <div class="contents">
     {% block contents %}
     asdf
