@@ -61,6 +61,11 @@ Create a Report - TrailReporter.com
       handle: '#id_time'
     });
 //    $("#createForm").validate();
+    // hide the lat/lon inputs
+    $('#id_location_lat').hide();
+    $('#id_location_lng').hide();
+    $('label[for=id_location_lat]').hide();
+    $('label[for=id_location_lng]').hide();
   });
 </script>
 {% endblock %}

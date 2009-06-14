@@ -7,8 +7,8 @@ class Incident(db.Model):
     date = db.StringProperty(required=True)
     time = db.TimeProperty(required=True)
     category = db.StringProperty(required=True,choices=set(["Road Rage","Crash","Assault","Other"]))
-    location_lat = db.StringProperty()
-    location_lng = db.StringProperty()
+    location_lat = db.StringProperty(required=True)
+    location_lng = db.StringProperty(required=True)
     created_on = db.DateProperty(auto_now_add=1)
     created_by = db.UserProperty()
 
