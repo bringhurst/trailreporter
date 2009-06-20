@@ -5,9 +5,42 @@
 {% endblock %}
 
 {% block contents %}
-<div class="incident">
-{{incident.short_summary}}
-<br />
-{{incident.created_on|date}}
+<style>
+  label { position: absolute; text-align:right; width:130px; }
+  #detail-form-content{
+    background-color: #ffffff;
+    border: .2em solid #c0c0c0;
+  }
+  #mapstraction_detailmap{
+    position: relative;
+    height: 400px;
+    width: 90%;
+    margin: 10px;
+  }
+</style>
+
+<div id="detail-form-content">
+  <h4>{{incident.short_summary}}</h4>
+  <h4>{{incident.created_on|date}}</h4>
+
+  <div id="mapstraction_detailmap"></div>
 </div>
+<script>
+  var tr_mxn_dm;
+  $(document).ready(function() {
+    tr_mxn_dm = new Mapstraction('mapstraction_detailmap', 'google');
+    tr_mxn_dm.addControls({
+      pan: true,
+      zoom: 'large',
+      overview: true,
+      scale: true,
+      map_type: true
+    });
+    var myPoint = new LatLonPoint({{incident.location_lat}},{{incident.location_lng}});
+    var new_marker = new Marker(myPoint);
+    tr_mxn_dm.removeAllMarkers();
+    tr_mxn_dm.addMarker(new_marker);
+    tr_mxn_dm.autoCenterAndZoom();
+  });
+</script>
 {% endblock %}
