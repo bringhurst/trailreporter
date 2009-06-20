@@ -14,10 +14,6 @@ Bike Trail Incident Reporter - TrailReporter.com
       return;
     }
 
-    var bounds = tr_mxn_hm.getBounds();
-    var sw = bounds.getSouthWest();
-    var ne = bounds.getNorthEast();
-
     var ll = new LatLonPoint( args.latitude, args.longitude );
     var marker = new Marker(ll);
     var el = document.createElement('h4');
@@ -48,6 +44,9 @@ Bike Trail Incident Reporter - TrailReporter.com
     }
     addHeatMapMarker(args{{forloop.counter}});
     {% endfor %}
+
+    // center the map on all points
+    tr_mxn_hm.autoCenterAndZoom();
   });
 </script>
 
