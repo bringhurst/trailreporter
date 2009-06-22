@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Create a Report - TrailReporter.com
+{% endblock %}
+
+{% block content %}
+<style>
+  label { position: absolute; text-align:right; width:130px; }
+  input, textarea, select, span.ui-timepickr { margin-left: 140px; width:65%; }
+  #mapstraction_createmap{
+    position: relative;
+    height: 400px;
+    width: 90%;
+    margin: 10px;
+  }
+</style>
+
+<div id="create-form-content">
+  <p style="margin:15px">Use the form below to file an incident report with TrailReporter. Moderated incidents will be analyzed for patterns and local community organizations will be notified.</p>
+  <form id="createForm" action="." method="post">
+    {{form.as_p}}
+    <p style="margin-top:15px;margin-bottom:0px;margin-right:15px;margin-left:15px;">Click on the map below to select the location of the incident.</p>
+    <div id="mapstraction_createmap"></div>
+    <p style="margin:15px">Always call the Police first and get a police report if you have been in a crash or subject to road rage. Submitting this report is not a replacement for calling 911 or other appropriate authorities.</p>
+    <center>
+      <p>
+      <p><input type="submit" style="width:auto;margin:0;margin-bottom:15px;" name="createincident" value="{% if object %}Apply changes{% else %}Create{% endif %}" />
+    </center>
+  </form>
+</div>
+<script>
+  var tr_mxn_cm;
+  $(document).ready(function() {
+    tr_mxn_cm = new Mapstraction('mapstraction_createmap', 'google');
+    tr_mxn_cm.addControls({
+      pan: true,
+      zoom: 'large',
+      overview: true,
+      scale: true,
+      map_type: true
+    });
+    // if we're in edit mode, show the saved marker
+    if($('#id_location_lat').val() && $('#id_location_lng').val()) {
+      tr_mxn_cm.removeAllMarkers();
+      var editPoint = new LatLonPoint($('#id_location_lat').val(),$('#id_location_lng').val());
+      var editMarker = new Marker(editPoint);
+      tr_mxn_cm.addMarker(editMarker);
+      tr_mxn_cm.autoCenterAndZoom();
+    }
+    // set the initial location
+    var myPoint = new LatLonPoint(40.039362,-75.242894);
+    tr_mxn_cm.setCenterAndZoom(myPoint, 14);
+
+    tr_mxn_cm.addEventListener('click', function(point, marker) {
+      tr_mxn_cm.removeAllMarkers();
+      var new_marker = new Marker(point);
+      tr_mxn_cm.addMarker(new_marker);
+      $('#id_location_lat').val(point.lat);
+      $('#id_location_lng').val(point.lon);
+    });
+
+    $('#id_date').datepicker({
+      inline: true,
+      showTime: true
+    });
+    $('#id_time').timepickr({
+      convention: 24,
+      handle: '#id_time'
+    });
+    $('#id_description').autogrow();
+//    $("#createForm").validate();
+    // hide the lat/lon inputs
+    $('#id_location_lat').hide();
+    $('#id_location_lng').hide();
+    $('label[for=id_location_lat]').hide();
+    $('label[for=id_location_lng]').hide();
+  });
+</script>
+{% endblock %}
