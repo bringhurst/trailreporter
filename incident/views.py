@@ -11,6 +11,7 @@ from incident.forms import IncidentForm
 from incident.models import Incident
 from ragendja.dbutils import get_object_or_404
 from django.shortcuts import render_to_response
+from google.appengine.api import mail
 
 def render(template, payload):
     payload['recents'] = Incident.all()
@@ -28,6 +29,12 @@ def show_incident(request, key):
     return object_detail(request, Incident.all(), key)
 
 def add_incident(request):
+    if request.method == 'POST':
+        message = mail.EmailMessage(sender="fintler@gmail.com",
+            subject="[TrailReporter] A new incident has been reported")
+        message.to = "fintler@gmail.com"
+        message.body = str(request.POST)
+        message.send()
     return create_object(request, form_class=IncidentForm,
         post_save_redirect=reverse('incident.views.show_incident',
                                    kwargs=dict(key='%(key)s')))
