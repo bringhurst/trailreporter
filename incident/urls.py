@@ -2,7 +2,7 @@
 from django.conf.urls.defaults import *
 
 urlpatterns = patterns('incident.views',
-    (r'^$', 'list_incidents'),
+    (r'^list/$', 'list_incidents'),
     (r'^create/$', 'add_incident'),
     (r'^show/(?P<key>.+)$', 'show_incident'),
     (r'^edit/(?P<key>.+)$', 'edit_incident'),

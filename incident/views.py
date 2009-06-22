@@ -10,7 +10,16 @@ from mimetypes import guess_type
 from incident.forms import IncidentForm
 from incident.models import Incident
 from ragendja.dbutils import get_object_or_404
-from ragendja.template import render_to_response
+from django.shortcuts import render_to_response
+
+def render(template, payload):
+    payload['recents'] = Incident.all()
+    return render_to_response(template, payload)
+
+def index(request):
+    incidents = Incident.all()
+    payload = dict(incidents = incidents)
+    return render('main.html', payload)
 
 def list_incidents(request):
     return object_list(request, Incident.all(), paginate_by=10)

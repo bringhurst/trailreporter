@@ -1,14 +1,43 @@
 {% extends 'base.html' %}
-{% block title %}Incident details{% endblock %}
+
+{% block title %}{{object.short_summary}}{% endblock %}
 
 {% block content %}
-<h1>Incident details</h1>
-<a href="{% url incident.views.list_incidents %}">Back to listing</a>
-{% if user.is_authenticated %}
-<a href="{% url incident.views.edit_incident key=incident.key %}">Edit</a>
-<a href="{% url incident.views.delete_incident key=incident.key %}">Delete</a>
-{% endif %}
-<ul>
-  <li>First name: {{ object.short_summary }}</li>
-</ul>
+<style>
+  label { position: absolute; text-align:right; width:130px; }
+  #mapstraction_detailmap{
+    position: relative;
+    height: 400px;
+    width: 90%;
+    margin: 10px;
+  }
+</style>
+<div id="detail-form-content">
+  <h4>{{object.short_summary}}</h4>
+  <h4>{{object.date}}</h4>
+  <a href="{% url incident.views.list_incidents %}">Back to listing</a>
+  {% if user.is_authenticated %}
+  <a href="{% url incident.views.edit_incident key=incident.key %}">Edit</a>
+  <a href="{% url incident.views.delete_incident key=incident.key %}">Delete</a>
+  {% endif %}
+  <div id="mapstraction_detailmap"></div>
+</div>
+<script>
+  var tr_mxn_dm;
+  $(document).ready(function() {
+    tr_mxn_dm = new Mapstraction('mapstraction_detailmap', 'google');
+    tr_mxn_dm.addControls({
+      pan: true,
+      zoom: 'large',
+      overview: true,
+      scale: true,
+      map_type: true
+    });
+    var myPoint = new LatLonPoint({{object.location_lat}},{{object.location_lng}});
+    var new_marker = new Marker(myPoint);
+    tr_mxn_dm.removeAllMarkers();
+    tr_mxn_dm.addMarker(new_marker);
+    tr_mxn_dm.autoCenterAndZoom();
+  });
+</script>
 {% endblock %}
