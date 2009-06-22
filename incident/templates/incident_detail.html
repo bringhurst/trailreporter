@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Incident details{% endblock %}
+
+{% block content %}
+<h1>Incident details</h1>
+<a href="{% url incident.views.list_incidents %}">Back to listing</a>
+{% if user.is_authenticated %}
+<a href="{% url incident.views.edit_incident key=incident.key %}">Edit</a>
+<a href="{% url incident.views.delete_incident key=incident.key %}">Delete</a>
+{% endif %}
+<ul>
+  <li>First name: {{ object.short_summary }}</li>
+</ul>
+{% endblock %}
