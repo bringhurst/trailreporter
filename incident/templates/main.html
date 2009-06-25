@@ -6,14 +6,23 @@
   var tr_mxn_hm;
 
   function addHeatMapMarker( args ) {
-    if( !args.latitude || !args.longitude || !args.summary ) {
+    if( !args.latitude || !args.longitude || !args.summary || !args.key ) {
       return;
     }
 
     var ll = new LatLonPoint( args.latitude, args.longitude );
     var marker = new Marker(ll);
-    var el = document.createElement('h4');
-    el.appendChild( document.createTextNode(args.summary));
+    var el = document.createElement('div');
+
+    var bubbleTitle = document.createElement('h4');
+    bubbleTitle.appendChild( document.createTextNode(args.summary));
+
+    var bubbleLink = document.createElement('a');
+    bubbleLink.href = "/incident/show/" + args.key;
+    bubbleLink.appendChild( document.createTextNode("Click here to display details.") );
+
+    el.appendChild(bubbleTitle);
+    el.appendChild(bubbleLink);
 
     marker.setInfoBubble(el);
     tr_mxn_hm.addMarker( marker );
@@ -35,9 +44,10 @@
 
     {% for incident in incidents %}
     var args{{forloop.counter}} = {
-      latitude: {{incident.location_lat}},
-      longitude: {{incident.location_lng}},
-      summary: '{{incident.short_summary}}'
+      latitude: '{{incident.location_lat}}',
+      longitude: '{{incident.location_lng}}',
+      summary: '{{incident.short_summary}}',
+      key: '{{incident.key}}'
     }
     addHeatMapMarker(args{{forloop.counter}});
     {% endfor %}
