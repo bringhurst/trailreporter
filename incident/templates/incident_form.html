@@ -6,13 +6,20 @@ Create a Report - TrailReporter.com
 
 {% block content %}
 <style>
-  label { position: absolute; text-align:right; width:135px; }
-  input, textarea, select, span.ui-timepickr { margin-left: 145px; width:65%; }
+  label { position: absolute; text-align:right; width:145px; }
+  input, textarea, select, span.ui-timepickr { margin-left: 155px; width:65%; }
   #mapstraction_createmap{
     position: relative;
     height: 400px;
-    width: 90%;
-    margin: 10px;
+    width: 100%;
+    margin: 0;
+    margin-bottom: 10px;
+  }
+  #map-click-instructions{
+    margin:0;
+    padding:0;
+    background-color:#EBDDE2;
+    width:100%;
   }
 </style>
 
@@ -20,7 +27,9 @@ Create a Report - TrailReporter.com
   <p style="margin:15px">Use the form below to file an incident report with TrailReporter. Moderated incidents will be analyzed for patterns and local community organizations will be notified.</p>
   <form id="createForm" action="." method="post">
     {{form.as_p}}
-    <p style="margin-top:15px;margin-bottom:0px;margin-right:15px;margin-left:15px;">Click on the map below to select the location of the incident.</p>
+    <div id="map-click-instructions">
+    <p style="text-align:center;margin-top:15px;margin-bottom:0px;margin-right:15px;margin-left:15px;">Click on the map below to select the location of the incident.</p>
+    </div>
     <div id="mapstraction_createmap"></div>
     <p style="margin:15px">We encourage everyone to call 911 should they be a victim of a crime or witness criminal or suspicious activity on the Schuylkill River Trail. We realize that there may be circumstances that some believe do not warrant a call to 911. Should that be the case, we encourage the use of this system as a type of neighborhood watch reporting device. It will provide information on unsafe or improper activities on the SRT to the proper authorities so the trail can be improved for all its users. Thank you for your help.</p>
     <center>
