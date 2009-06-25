@@ -2,6 +2,7 @@
 {% block title %}Incident listing{% endblock %}
 
 {% block content %}
+<div style="margin:15px;"
 <h1>Incident listing</h1>
 <a href="{% url incident.views.add_incident %}">Create incident</a>
 
@@ -24,5 +25,6 @@
   {% if has_next %}
     <a href="{% url incident.views.list_incidents %}?page={{ next }}">next-&gt;</a>
   {% endif %}
+</div>
 </div>
 {% endblock %}

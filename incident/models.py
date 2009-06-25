@@ -9,6 +9,8 @@ class Incident(db.Model):
     date = db.StringProperty(required=True)
     time = db.StringProperty(required=True)
     category = db.StringProperty(required=True)
+    philly_311_reference = db.StringProperty()
+    police_report_number = db.StringProperty()
     location_lat = db.StringProperty(required=True)
     location_lng = db.StringProperty(required=True)
 

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block title %}Bike Trail Incident Reporter{% endblock %}
 {% block content %}
-<div id="mapstraction_heatmap" style="position:relative;  height: 400px; width: 100%;"></div>
+<div id="mapstraction_heatmap" style="position:relative; margin:0; padding:0; height: 400px; width: 100%;"></div>
 <script>
   var tr_mxn_hm;
 
@@ -21,11 +21,12 @@
 
   $(document).ready(function() {
     tr_mxn_hm = new Mapstraction('mapstraction_heatmap', 'google');
+    tr_mxn_hm.setMapType(Mapstraction.HYBRID);
     tr_mxn_hm.addControls({
       pan: true,
-      zoom: 'large',
-      overview: true,
-      scale: true,
+      zoom: 'small',
+      overview: false,
+      scale: false,
       map_type: true
     });
 

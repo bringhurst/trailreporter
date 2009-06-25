@@ -29,13 +29,6 @@
               <a href="{% url incident.views.list_incidents %}">List reported incidents</a>
             </ul>
           </div>
-          <div id="latest-news">
-            <h2>Recent Incidents</h2>
-            {% for incident in recents %} 
-            <p class="date">{{incident.date}}</p>
-            <p><a href="{{incident.get_absolute_url}}">{{incident.short_summary}}</a></p>
-            {% endfor %}
-          </div>
           {% endblock %}
         </div>
         <div id="column2">

@@ -138,7 +138,10 @@ blockquote {
 }
 
 #page-content {
-	background: url(images/image05.gif) repeat-x left top;
+	background-color: white;
+	border: .2em solid #cccccc;
+	margin: 0;
+	padding: 0;
 }
 
 #latest-news {
@@ -165,7 +168,8 @@ blockquote {
 
 .content {
 	line-height: 22px;
-	padding: 20px 5px;
+	padding: 0;
+	margin: 0;
 }
 
 .content h2 {

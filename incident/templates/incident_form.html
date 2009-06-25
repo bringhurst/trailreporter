@@ -6,8 +6,8 @@ Create a Report - TrailReporter.com
 
 {% block content %}
 <style>
-  label { position: absolute; text-align:right; width:130px; }
-  input, textarea, select, span.ui-timepickr { margin-left: 140px; width:65%; }
+  label { position: absolute; text-align:right; width:135px; }
+  input, textarea, select, span.ui-timepickr { margin-left: 145px; width:65%; }
   #mapstraction_createmap{
     position: relative;
     height: 400px;
@@ -22,10 +22,10 @@ Create a Report - TrailReporter.com
     {{form.as_p}}
     <p style="margin-top:15px;margin-bottom:0px;margin-right:15px;margin-left:15px;">Click on the map below to select the location of the incident.</p>
     <div id="mapstraction_createmap"></div>
-    <p style="margin:15px">Always call the Police first and get a police report if you have been in a crash or subject to road rage. Submitting this report is not a replacement for calling 911 or other appropriate authorities.</p>
+    <p style="margin:15px">We encourage everyone to call 911 should they be a victim of a crime or witness criminal or suspicious activity on the Schuylkill River Trail. We realize that there may be circumstances that some believe do not warrant a call to 911. Should that be the case, we encourage the use of this system as a type of neighborhood watch reporting device. It will provide information on unsafe or improper activities on the SRT to the proper authorities so the trail can be improved for all its users. Thank you for your help.</p>
     <center>
       <p>
-      <p><input type="submit" style="width:auto;margin:0;margin-bottom:15px;" name="createincident" value="{% if object %}Apply changes{% else %}Create{% endif %}" />
+      <p><input type="submit" style="width:auto;margin:0;margin-bottom:15px;" name="createincident" value="{% if object %}Apply changes{% else %}Send Your Report{% endif %}" />
     </center>
   </form>
 </div>
@@ -33,6 +33,7 @@ Create a Report - TrailReporter.com
   var tr_mxn_cm;
   $(document).ready(function() {
     tr_mxn_cm = new Mapstraction('mapstraction_createmap', 'google');
+    tr_mxn_cm.setMapType(Mapstraction.HYBRID);
     tr_mxn_cm.addControls({
       pan: true,
       zoom: 'large',
