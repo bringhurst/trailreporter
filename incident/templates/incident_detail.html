@@ -14,7 +14,7 @@
   }
 </style>
 <div id="detail-form-content">
-  <a href="{% url incident.views.list_incidents %}">Back to listing</a>
+  <a style="margin-left:2px;" href="{% url incident.views.list_incidents %}">Back to listing</a>
   <h2 style="margin-top:5px;margin-left:15px;margin-right:15px;">{{object.short_summary}} <small>({{object.date}})</small></h2>
   <div style="margin-left:15px;margin-right:20px;margin-top:5px;margin-bottom:15px;border-style:solid;border-width:1px;border-color:#cccccc">
     <p style="margin:5px;margin-bottom:15px;">{{object.description}}</p>
