@@ -10,22 +10,13 @@
       return;
     }
 
-    var ll = new LatLonPoint( args.latitude, args.longitude );
-    var marker = new Marker(ll);
-    var el = document.createElement('div');
+    var bubble_text_title = "<h4>" + args.summary + "</h4>";
+    var bubble_text_link = "<a href='/incident/show/" + args.key +
+        "'>Click here to display details.</a>";
 
-    var bubbleTitle = document.createElement('h4');
-    bubbleTitle.appendChild( document.createTextNode(args.summary));
-
-    var bubbleLink = document.createElement('a');
-    bubbleLink.href = "/incident/show/" + args.key;
-    bubbleLink.appendChild( document.createTextNode("Click here to display details.") );
-
-    el.appendChild(bubbleTitle);
-    el.appendChild(bubbleLink);
-
-    marker.setInfoBubble(el);
-    tr_mxn_hm.addMarker( marker );
+    var my_marker = new Marker(new LatLonPoint( args.latitude, args.longitude ));
+    my_marker.setInfoBubble(bubble_text_title + "<br />" + bubble_text_link);
+    tr_mxn_hm.addMarker(my_marker);
   }
 
   $(document).ready(function() {
@@ -39,21 +30,21 @@
       map_type: true
     });
 
-    var myPoint = new LatLonPoint(40.039362,-75.242894);
-    tr_mxn_hm.setCenterAndZoom(myPoint, 14);
+    var centerOnPoints = [];
 
     {% for incident in incidents %}
-    var args{{forloop.counter}} = {
+    addHeatMapMarker({
       latitude: '{{incident.location_lat}}',
       longitude: '{{incident.location_lng}}',
       summary: '{{incident.short_summary}}',
       key: '{{incident.key}}'
-    }
-    addHeatMapMarker(args{{forloop.counter}});
+    });
+    centerOnPoints.push(new LatLonPoint( {{incident.location_lat}}, {{incident.location_lng}} ));
     {% endfor %}
 
     // center the map on all points
-    tr_mxn_hm.autoCenterAndZoom();
+    tr_mxn_hm.centerAndZoomOnPoints(centerOnPoints);
+    tr_mxn_hm.setZoom(tr_mxn_hm.getZoom()-1);
   });
 </script>
 
