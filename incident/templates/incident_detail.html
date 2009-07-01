@@ -15,9 +15,14 @@
 </style>
 <div id="detail-form-content">
   <a style="margin-left:2px;" href="{% url incident.views.list_incidents %}">Back to listing</a>
-  <h2 style="margin-top:5px;margin-left:15px;margin-right:15px;">{{object.short_summary}} <small>({{object.date}})</small></h2>
-  <div style="margin-left:15px;margin-right:20px;margin-top:5px;margin-bottom:15px;border-style:solid;border-width:1px;border-color:#cccccc">
+  <h2 style="margin-top:5px;margin-left:15px;margin-right:15px;">{{object.short_summary}} <small>({{object.date}} - {{object.time}})</small></h2>
+  <div style="margin-left:15px;margin-right:20px;margin-top:5px;margin-bottom:15px;">
+    <b>Description:</b>
     <p style="margin:5px;margin-bottom:15px;">{{object.description}}</p>
+  </div>
+  <div style="margin-left:15px;margin-right:20px;margin-top:5px;margin-bottom:15px;">
+    <b>Approximate Address:</b>
+    <p id="reverse_geocode_address_div" style="margin:5px;margin-bottom:15px;">Unknown</p>
   </div>
   {% if user.is_authenticated %}
   <a href="{% url incident.views.edit_incident key=incident.key %}">Edit</a>
@@ -37,11 +42,15 @@
       scale: true,
       map_type: true
     });
-    var myPoint = new LatLonPoint({{object.location_lat}},{{object.location_lng}});
+    var myPoint = new LatLonPoint('{{object.location_lat}}','{{object.location_lng}}');
     var new_marker = new Marker(myPoint);
     tr_mxn_dm.removeAllMarkers();
     tr_mxn_dm.addMarker(new_marker);
     tr_mxn_dm.autoCenterAndZoom();
+    $('#reverse_geocode_address_div').reversegeocode({
+      lat: '{{object.location_lat}}',
+      lng: '{{object.location_lng}}'
+    });
   });
 </script>
 {% endblock %}
