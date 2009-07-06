@@ -25,6 +25,11 @@ def index(request):
 def list_incidents(request):
     return object_list(request, Incident.all(), paginate_by=10)
 
+def georss(request):
+    incidents = Incident.all()
+    payload = dict(incidents = incidents)
+    return render('georssfeed.xml', payload)
+
 def show_incident(request, key):
     return object_detail(request, Incident.all(), key)
 
