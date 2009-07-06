@@ -7,7 +7,7 @@
   <updated>{{now}}</updated>
   {% for incident in incidents %}
   <entry>
-    <id>{% url incident.views.show_incident key=incident.key %}</id>
+    <id>{{incident.key}}</id>
     <author>
       <name>TrailReporter</name>
       </author>
@@ -16,6 +16,7 @@
       <content type="html"><![CDATA[
         {{incident.description}}
         ]]></content>
+      <link href="http://www.trailreporter.com{% url incident.views.show_incident key=incident.key %}" />
       <georss:point>{{object.location_lat}} {{object.location_lng}}</georss:point>
     </entry> {% endfor %}
 </feed>
