@@ -17,6 +17,6 @@
         {{incident.description}}
         ]]></content>
       <link href="http://www.trailreporter.com{% url incident.views.show_incident key=incident.key %}" />
-      <georss:point>{{object.location_lat}} {{object.location_lng}}</georss:point>
+      <georss:point>{{incident.location_lat}} {{incident.location_lng}}</georss:point>
     </entry> {% endfor %}
 </feed>
