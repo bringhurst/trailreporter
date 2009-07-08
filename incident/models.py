@@ -4,7 +4,7 @@ from google.appengine.ext import db
 
 class Incident(db.Model):
     short_summary = db.StringProperty(required=True)
-    description = db.StringProperty(multiline=True,required=True)
+    description = db.TextProperty(required=True)
     email = db.EmailProperty(required=True)
     date = db.StringProperty(required=True)
     time = db.StringProperty(required=True)
