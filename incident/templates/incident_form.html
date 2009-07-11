@@ -39,6 +39,19 @@ Create a Report - TrailReporter.com
   </form>
 </div>
 <script>
+  function __textareaIfy(element) {
+    var textarea = $('<textarea>')
+      .attr('cols', (Math.round((parseInt(element.size||20,10)/1.35))+''))
+      .attr('rows', '4')
+      .val($(element).val());
+      for (var i=0, len=element.attributes.length; i < len; i++) {
+        if (element.attributes[i].nodeName != 'type') {
+          textarea.attr(element.attributes[i].nodeName, element.attributes[i].nodeValue);
+        }
+      }
+      textarea.insertBefore(element);
+      $(element).remove();
+  }
   var tr_mxn_cm;
   $(document).ready(function() {
     tr_mxn_cm = new Mapstraction('mapstraction_createmap', 'google');
@@ -78,9 +91,8 @@ Create a Report - TrailReporter.com
       convention: 24,
       handle: '#id_time'
     });
-    $('#id_description').autogrow();
-//    $("#createForm").validate();
-    // hide the lat/lon inputs
+    __textareaIfy($('#id_description')[0]);
+    $('#id_description').elastic();
     $('#id_location_lat').hide();
     $('#id_location_lng').hide();
     $('label[for=id_location_lat]').hide();
